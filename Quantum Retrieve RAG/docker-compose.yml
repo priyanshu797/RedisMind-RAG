@@ -1,0 +1,32 @@
+version: "3.9"
+
+services:
+  # ------------------------
+  # Ollama LLM Service
+  # ------------------------
+  ollama:
+    image: ollama/ollama:latest
+    container_name: ollama
+    ports:
+      - "11434:11434"           # Expose Ollama API to host and other containers
+    volumes:
+      - ollama_models:/root/.ollama  # Persist downloaded models
+    restart: unless-stopped
+
+  # ------------------------
+  # RAG Pipeline Service
+  # ------------------------
+  rag_app:
+    build: .
+    container_name: rag_app
+    volumes:
+      - .:/app                    # Mount current folder for PDFs, DOCX, etc.
+    stdin_open: true               # Keep stdin open for interactive CLI
+    tty: true                      # Allocate terminal
+    depends_on:
+      - ollama                     # Ensure Ollama starts first
+    environment:
+      - OLLAMA_BASE_URL=http://ollama:11434  # Tell RAG app to use Ollama service
+
+volumes:
+  ollama_models:                   # Persistent volume for Ollama models C:\Users\shukla\Desktop\Interview\How_to_Reduce_Stress_Levels.pdf
