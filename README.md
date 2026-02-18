@@ -132,7 +132,7 @@ Ensure RediSearch is enabled for vector indexing.
 Run the RAG pipeline:
 
 ```
-python 1.py
+python rag_pipeline.py
 ```
 
 Provide file paths when prompted, then ask document-based questions interactively.
