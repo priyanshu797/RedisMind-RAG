@@ -1,0 +1,15 @@
+python-dotenv
+nltk
+python-docx
+openai-whisper
+pdfplumber
+pytesseract
+opencv-python
+numpy
+redis
+sentence-transformers
+torch
+llama-index-core
+llama-index-embeddings-huggingface
+llama-index-llms-groq
+llama-index-llms-ollama
